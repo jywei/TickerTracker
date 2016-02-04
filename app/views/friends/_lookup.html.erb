@@ -4,7 +4,7 @@
   <div class="form-group row no-padding text-center col-md-12">
     <div class="col-md-10">
       <%= text_field_tag :search_param, params[:search_param],
-      placeholder: "first name, last name, of email", autofocus: true,
+      placeholder: "First Name, Last Name, or Email", autofocus: true,
       class: 'form-control search-box input-lg' %>
     </div>
 
@@ -21,7 +21,7 @@
 
   <% if @users %>
     <% if @users.size > 0 %>
-      <div id="friend-lookup-results" class="well results-block col-md-10">
+      <div id="friend-lookup-results" class="well results-block col-md-12">
         <table class="search-results-table col-md-12">
           <tbody>
             <% @users.each do |user| %>
@@ -29,12 +29,12 @@
               <td><strong>Name: </strong><%= user.full_name %></td>
               <td><strong>Email: </strong><%= user.email %></td>
               <td><strong>Profile: </strong><%= link_to "View Profile", user_path(user),
-                                              class: "btn btn-xs btn-success" %>
-                <% if current_user.not_friend_with?(user.id) %>
+                                              class: "btn btn-xs btn-primary" %>
+                <% if current_user.not_friends_with?(user.id) %>
                   <%= link_to "Add Friend", add_friend_path(user: current_user, friend: user),
                                               class: "btn btn-xs btn-success", method: :post %>
                 <% else %>
-                  <span class="label label-primary">
+                  <span class="btn btn-xs btn-success">
                     You are friends already!
                   </span>
                 <% end %>
